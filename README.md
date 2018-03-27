@@ -10,5 +10,5 @@
 
 1. / - show message "Hello, world"
 2. /time - show current date and time
-3. /greeting/<name> - show message "Hello, <name>"
+3. /greeting/name - show message "Hello, name"
 4. /names - store all names from 'greeting' and show them
