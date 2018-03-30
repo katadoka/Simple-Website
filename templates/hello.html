@@ -1,0 +1,14 @@
+<!doctype html>
+<html>
+    <head>	
+        <title>Names</title>
+    </head>
+    <body>
+		<b>Names:</b>
+		<p>
+		{% for name in names %}
+			<option value="{{name}}">{{name}}</option>
+		{% endfor %}
+		<p>
+    </body>
+</html>
