@@ -1,6 +1,7 @@
 from flask import Flask
 from datetime import datetime
 from flask import render_template
+from modelsorm import User, Amount
 
 app = Flask(__name__)
 
@@ -17,15 +18,26 @@ def datanow():
 
 @app.route('/greeting/<name>')
 def show_name(name):
-    with open('names.txt', 'a') as f_out:
-        f_out.write(f'{name}\n')
+    User.get_or_create(username=name)
     return 'Hello, {}'.format(name)
+
+
+def search_name(name):
+    query = (Amount
+        .select(Amount.user_id, Amount.amount)
+        .where(Amount.user_id == name))
+    return query
 
 
 @app.route('/names')
 def show_names():
+    query_names = (User
+                .select(User.username))
+
     names = []
-    with open('names.txt', 'r') as f_out:
-        for line in f_out:
-            names.append(line)
+    for row in query_names:
+        current_balance_name = 0
+        for amount in search_name(row.username):
+            current_balance_name += amount.amount
+        names.append('{} - {}'.format(row.username, current_balance_name))
     return render_template('hello.html', names=names)
