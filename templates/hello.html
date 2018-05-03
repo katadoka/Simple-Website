@@ -6,8 +6,10 @@
     <body>
 		<b>Names:</b>
 		<p>
-		{% for name in names %}
-			<option value="{{name}}">{{name}} </option> 
+		{% for row in rows %}
+			<ul>
+				<li> {{row.user.username}} - {{row.balance}}</li>
+			</ul>
 		{% endfor %}
 		<p>
     </body>
