@@ -6,11 +6,11 @@
     <body>
 		<b>Names:</b>
 		<p>
-		{% for row in rows %}
 			<ul>
+			{% for row in rows %}
 				<li> {{row.user.username}} - {{row.balance}}</li>
+			{% endfor %}
 			</ul>
-		{% endfor %}
 		<p>
     </body>
 </html>
